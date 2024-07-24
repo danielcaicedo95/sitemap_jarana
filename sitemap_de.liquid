@@ -1,0 +1,37 @@
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Productos -->
+  {% for product in collections.all.products %}
+    {% if product.tags contains "de" %}
+      <url>
+        <loc>{{ shop.url }}/de/products/{{ product.handle }}</loc>
+        <lastmod>{{ product.updated_at | date: "%Y-%m-%d" }}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+      </url>
+    {% endif %}
+  {% endfor %}
+
+  <!-- Colecciones -->
+  {% for collection in collections %}
+    {% if collection.tags contains "de" %}
+      <url>
+        <loc>{{ shop.url }}/de/collections/{{ collection.handle }}</loc>
+        <lastmod>{{ collection.updated_at | date: "%Y-%m-%d" }}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+      </url>
+    {% endif %}
+  {% endfor %}
+
+  <!-- Páginas -->
+  {% for page in pages %}
+    {% if page.tags contains "de" %}
+      <url>
+        <loc>{{ shop.url }}/de/pages/{{ page.handle }}</loc>
+        <lastmod>{{ page.updated_at | date: "%Y-%m-%d" }}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+      </url>
+    {% endif %}
+  {% endfor %}
+</urlset>
