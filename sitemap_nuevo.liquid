@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+ 
+  <!-- Colecciones -->
+  {% for collection in collections %}
+    {% assign exclude_sitemap = false %}
+    {% if collection.metafields.custom.ocultar_sitemap %}
+      {% assign excluded_countries = collection.metafields.custom.ocultar_sitemap | split: ',' %}
+      {% if excluded_countries contains 'es' %}
+        {% assign exclude_sitemap = true %}
+      {% endif %}
+    {% endif %}
+    {% unless exclude_sitemap %}
+      <url>
+        <loc>{{ shop.url }}/collections/{{ collection.handle }}</loc>
+        <lastmod>{{ collection.updated_at | date: "%Y-%m-%d" }}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+      </url>
+    {% endunless %}
+  {% endfor %}
+
+  <!-- Páginas -->
+  {% for page in pages %}
+    {% assign exclude_sitemap = false %}
+    {% if page.metafields.custom.ocultar_sitemap %}
+      {% assign excluded_countries = page.metafields.custom.ocultar_sitemap | split: ',' %}
+      {% if excluded_countries contains 'es' %}
+        {% assign exclude_sitemap = true %}
+      {% endif %}
+    {% endif %}
+    {% unless exclude_sitemap %}
+      <url>
+        <loc>{{ shop.url }}/pages/{{ page.handle }}</loc>
+        <lastmod>{{ page.updated_at | date: "%Y-%m-%d" }}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+      </url>
+    {% endunless %}
+  {% endfor %}
+</urlset>
